@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public abstract class Pickup : MonoBehaviour
+public abstract class ExamplePickup : MonoBehaviour
 {
 
     public bool hasTimeToLive = true;
     public float timeToLive = 10.0f;
     
-    abstract internal void OnPickup(Player player);
+    abstract internal void OnPickup(ExamplePlayer player);
 
     internal void Destroy()
     {
@@ -23,7 +23,7 @@ public abstract class Pickup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out ExamplePlayer player))
         {
             OnPickup(player);
         }

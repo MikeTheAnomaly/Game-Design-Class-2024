@@ -1,19 +1,19 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, Damageable
+public class ExampleEnemy : MonoBehaviour, ExampleDamageable
 {
     public float moveSpeed = 5.0f;
     public Transform target;
     private NavMeshAgent agent;
 
     [SerializeField]
-    private Health _health = new(20); 
-    public Health Health {get{return _health;} set{_health = value;}}
+    private ExampleHealth _health = new(20); 
+    public ExampleHealth Health {get{return _health;} set{_health = value;}}
 
     [SerializeField]
-    public Team _team = new(TeamType.Team2);
-    public Team Team {get{return _team;} set{_team = value;}}
+    public ExampleTeam _team = new(TeamType.Team2);
+    public ExampleTeam Team {get{return _team;} set{_team = value;}}
 
 
     //Animation
@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour, Damageable
     public Animator characterAnim;
 
     //sound
-    public RandomSoundPlayer deathSoundPlayer;
-    public RandomSoundPlayer hitSoundPlayer;
+    public ExampleRandomSoundPlayer deathSoundPlayer;
+    public ExampleRandomSoundPlayer hitSoundPlayer;
     void OnEnable(){
         
     }
@@ -34,9 +34,9 @@ public class Enemy : MonoBehaviour, Damageable
         anim = GetComponent<Animator>();
         Health.OnDeath.AddListener(OnDeath);
 
-        this.Team = new Team(this.Team.teamType, this.gameObject);
+        this.Team = new ExampleTeam(this.Team.teamType, this.gameObject);
 
-        this.Health.OnHealthChanged.AddListener((Health health) => {
+        this.Health.OnHealthChanged.AddListener((ExampleHealth health) => {
             hitSoundPlayer.PlayRandomSound();
         });
 
@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour, Damageable
     public void OnDeath()
     {
         //spawn a drop
-        Drop randomDrop = GameManager._GameManager.GetWeightedRandomDrop();
+        Drop randomDrop = ExampleGameManager._GameManager.GetWeightedRandomDrop();
         GameObject drop = Instantiate(randomDrop.dropPrefab, transform.position, Quaternion.identity);
 
         deathSoundPlayer.PlayRandomSound();

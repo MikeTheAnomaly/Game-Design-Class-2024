@@ -3,17 +3,17 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Player : MonoBehaviour, Damageable
+public class ExamplePlayer : MonoBehaviour, ExampleDamageable
 {
 
     [SerializeField]
-    private Health _health = new(100);
-    public Health Health { get { return _health; } set { _health = value; } }
+    private ExampleHealth _health = new(100);
+    public ExampleHealth Health { get { return _health; } set { _health = value; } }
 
 
     [SerializeField]
-    public Team _team = new(TeamType.Team1);
-    public Team Team { get { return _team; } set { _team = value; } }
+    public ExampleTeam _team = new(TeamType.Team1);
+    public ExampleTeam Team { get { return _team; } set { _team = value; } }
 
     public float speed = 5.0f;
     private Vector2 moveDirection = Vector2.zero;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, Damageable
     private Vector2 lookDirection = Vector2.zero;
     private Rigidbody rb;
 
-    public BaseWeapon weapon;
+    public ExampleBaseWeapon weapon;
     private bool isMouse;
 
     public Animator anim;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour, Damageable
             weapon.owner = gameObject;
         }
 
-        this.Team = new Team(this.Team.teamType, this.gameObject);
+        this.Team = new ExampleTeam(this.Team.teamType, this.gameObject);
     }
 
     // Update is called once per frame
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour, Damageable
         this.isMouse = playerInput.currentControlScheme == "Keyboard&Mouse";
     }
 
-    public void SetWeapon(BaseWeapon weapon)
+    public void SetWeapon(ExampleBaseWeapon weapon)
     {
         //if its the same weapon we dont want to do anything
         if (this.weapon.name == weapon.name){
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour, Damageable
     {
         if (other.tag == "Pickup")
         {
-            other.GetComponent<Pickup>().OnPickup(this);
+            other.GetComponent<ExamplePickup>().OnPickup(this);
         }
     }
 

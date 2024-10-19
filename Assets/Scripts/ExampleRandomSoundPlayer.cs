@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class RandomSoundPlayer : MonoBehaviour
+public class ExampleRandomSoundPlayer : MonoBehaviour
 {
     [Header("Sound Settings")]
     [SerializeField] private AudioClip[] sounds;

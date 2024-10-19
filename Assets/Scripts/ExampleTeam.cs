@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Team
+public class ExampleTeam
 {
     public static List<GameObject> Team1List = new List<GameObject>();
     public static List<GameObject> Team2List = new List<GameObject>();
@@ -11,7 +11,7 @@ public class Team
 
     [SerializeField]
     public TeamType teamType;
-    public Team(TeamType teamType, GameObject trackedTeamObject){
+    public ExampleTeam(TeamType teamType, GameObject trackedTeamObject){
         this.teamType = teamType;
 
         if(teamType == TeamType.Team1){
@@ -23,7 +23,7 @@ public class Team
 
     }
 
-    public Team(TeamType teamType){
+    public ExampleTeam(TeamType teamType){
         this.teamType = teamType;
 
     }

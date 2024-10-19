@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BaseBullet : MonoBehaviour
+public class ExampleBaseBullet : MonoBehaviour
 {
 
     public UnityEvent OnDestroy;
@@ -39,7 +39,7 @@ public class BaseBullet : MonoBehaviour
                 gameObject.SetActive(false);
                 OnDestroy.Invoke();
             }
-            if (collision.gameObject != owner && collision.gameObject.TryGetComponent(out Damageable damageable))
+            if (collision.gameObject != owner && collision.gameObject.TryGetComponent(out ExampleDamageable damageable))
             {
                 damageable.TakeDamage(10.0f);
             }

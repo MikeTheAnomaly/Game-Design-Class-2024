@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class BaseMeleeAttack : MonoBehaviour
+public class ExampleBaseMeleeAttack : MonoBehaviour
 {
     public float damage = 10.0f;
 
-    public Team team = new(TeamType.Team2);
+    public ExampleTeam team = new(TeamType.Team2);
 
 
-    public RandomSoundPlayer attackSoundPlayer;
+    public ExampleRandomSoundPlayer attackSoundPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +23,7 @@ public class BaseMeleeAttack : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Damageable damageable))
+        if (other.TryGetComponent(out ExampleDamageable damageable))
         {
             if (damageable.Team.teamType != team.teamType)
             {

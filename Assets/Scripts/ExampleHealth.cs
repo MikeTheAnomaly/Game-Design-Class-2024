@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class Health
+public class ExampleHealth
 {
 
     private float maxHealth;
     public float health = 100.0f;
     public UnityEvent OnDeath = new UnityEvent();
 
-    public UnityEvent<Health> OnHealthChanged = new(); 
+    public UnityEvent<ExampleHealth> OnHealthChanged = new(); 
 
-    public Health(float health)
+    public ExampleHealth(float health)
     {
         this.health = health;
         this.maxHealth = health;

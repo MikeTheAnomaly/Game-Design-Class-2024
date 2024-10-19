@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-public class BaseWeapon : MonoBehaviour
+public class ExampleBaseWeapon : MonoBehaviour
 {
     //rate of fire for the weapon in bullets per second
     public string weaponName = "Base Weapon";
@@ -12,7 +12,7 @@ public class BaseWeapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform barrelEnd;
     
-    public ObjectPool<BaseBullet> bulletPool;
+    public ObjectPool<ExampleBaseBullet> bulletPool;
     private float nextFireTime = 0.0f;
     private bool fireHeld;
 
@@ -22,15 +22,15 @@ public class BaseWeapon : MonoBehaviour
     public UnityEvent OnFire = new UnityEvent();
 
     public void Awake(){
-        bulletPool = new ObjectPool<BaseBullet>(() => {
+        bulletPool = new ObjectPool<ExampleBaseBullet>(() => {
             GameObject bullet = Instantiate(bulletPrefab);
-            BaseBullet baseBullet = bullet.GetComponent<BaseBullet>();
+            ExampleBaseBullet baseBullet = bullet.GetComponent<ExampleBaseBullet>();
             baseBullet.collisionMask = bulletCollisionMask;
             baseBullet.owner = owner;
             baseBullet.OnDestroy.AddListener(() => bulletPool.Release(baseBullet));
             bullet.SetActive(false);
 
-            return bullet.GetComponent<BaseBullet>();
+            return bullet.GetComponent<ExampleBaseBullet>();
         }, defaultCapacity: 50);
     }
 

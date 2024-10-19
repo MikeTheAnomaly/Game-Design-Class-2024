@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class ExampleGameManager : MonoBehaviour
 {
     //singleton
-    public static GameManager _GameManager;
+    public static ExampleGameManager _GameManager;
     
     [Header("Player System")]
-    public Player player;
+    public ExamplePlayer player;
 
     [Header("Enemy System")]
     public GameState gameState = GameState.roundStart;
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public float dropDecayRate = 0.1f;
     public List<Drop> possibleDrops;
 
-    ObjectPool<Enemy> enemyPool;
+    ObjectPool<ExampleEnemy> enemyPool;
 
     public BoxCollider[] spawnAreas;
     public int candyCornCount;
@@ -42,13 +42,13 @@ public class GameManager : MonoBehaviour
             _GameManager = this;
         }
 
-        enemyPool = new ObjectPool<Enemy>(() =>
+        enemyPool = new ObjectPool<ExampleEnemy>(() =>
         {
             enemyPrefab = Instantiate(enemyPrefab);
-            Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+            ExampleEnemy enemy = enemyPrefab.GetComponent<ExampleEnemy>();
             enemy.Health.OnDeath.AddListener(() => enemyPool.Release(enemy));
             enemyPrefab.SetActive(false);
-            return enemyPrefab.GetComponent<Enemy>();
+            return enemyPrefab.GetComponent<ExampleEnemy>();
         }, defaultCapacity: 50);
 
         StartRound(10);
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x), 0, UnityEngine.Random.Range(spawnArea.bounds.min.z, spawnArea.bounds.max.z));
-                Enemy enemy = enemyPool.Get();
+                ExampleEnemy enemy = enemyPool.Get();
                 enemy.Health.ResetHealth();
                 enemy.transform.position = spawnPosition;
                 enemy.gameObject.SetActive(true);
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
         candyCornText.text = candyCornCount.ToString();
     }
 
-    private void HealthListener(Health health){
+    private void HealthListener(ExampleHealth health){
         healthBar.fillAmount = health.NormalizedHealth;
     }
 }

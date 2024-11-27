@@ -28,6 +28,8 @@ public class ExamplePlayer : MonoBehaviour, ExampleDamageable
     public Animator anim;
     public Transform weaponPosition;
 
+    public float DashForce = 10.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -47,6 +49,7 @@ public class ExamplePlayer : MonoBehaviour, ExampleDamageable
         HandleMovement();
         UpdateAnimation();
     }
+
 
     void HandleMovement()
     {
@@ -77,6 +80,10 @@ public class ExamplePlayer : MonoBehaviour, ExampleDamageable
             anim.SetFloat("SpeedZ", localMoveDirection.z);
             anim.SetFloat("SpeedX", localMoveDirection.x);
         }
+    }
+
+    void Dash(){
+        rb.AddForce(new Vector3(this.lookDirection.x * this.speed * DashForce, 0, this.lookDirection.y * this.speed * DashForce), ForceMode.Impulse);
     }
 
     public void OnMove(InputValue value)
@@ -143,6 +150,16 @@ public class ExamplePlayer : MonoBehaviour, ExampleDamageable
             {
                 weapon.StopFire();
             }
+        }
+    }
+
+    public void OnDash(InputValue inputValue)
+    {
+        
+        float val = inputValue.Get<float>();
+        if (val > 0.0f)
+        {
+            Dash();
         }
     }
 

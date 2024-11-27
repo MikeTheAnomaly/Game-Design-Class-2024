@@ -56,7 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "example-day-1.sln",
+    "dotnet.defaultSolution": "Game-Design-Class-2024.sln",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#fa1b49",
         "activityBar.background": "#fa1b49",
